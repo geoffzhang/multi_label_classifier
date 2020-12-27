@@ -80,7 +80,7 @@ for epoch in range(args.num_epoch):
         preds = net(inputs)
         loss = critersion(preds, targets)
         
-        if min_loss < loss.item() and i%100 == 0:
+        if min_loss > loss.item() and i%100 == 0:
             min_loss = loss.item()
             torch.save(net.state_dict(), args.save_model_path+'face_quality_min_loss.pth')
         print('epoch:{}/{} iter:{}/{} loss:{:.4f}'.format(epoch, args.num_epoch, i, iter_total, loss.item()))
