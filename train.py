@@ -63,13 +63,13 @@ def main():
     
     # optimer
     optimizer = torch.optim.SGD(net.parameters(), args.lr, args.moment, args.weight_decay)
-    lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10)
+    lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1)
     
     # train
     writer = SummaryWriter(args.tensorboard)
     for epoch in range(args.num_epoch):
-        # train(net, train_data_loader, criterion, optimizer, writer, epoch)
-        # lr_scheduler.step()
+        train(net, train_data_loader, criterion, optimizer, writer, epoch)
+        lr_scheduler.step()
         
         print('begin validation...')
         prob = validation(net, val_data_loader)
